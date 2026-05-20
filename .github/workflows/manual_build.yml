@@ -124,7 +124,11 @@ jobs:
             cp bin/godot.universal bin/Godot.app/Contents/MacOS/Godot
             chmod +x bin/Godot.app/Contents/MacOS/Godot
           else
-            scons platform=${{ matrix.platform }} target=editor arch=${{ matrix.arch }} production=yes use_lto=yes
+            scons platform=${{matrix.platform}} tools=yes module_mono_enabled=yes mono_glue=no
+            bin/godot.windows.editor.x86_64.mono.exe --generate-mono-glue module/mono/glue
+            scons platform=${{matrix.platform}} tools=yes module_mono_enabled=yes mono_glue=yes
+            scons platform=${{matrix.platform}} tools=no module_mono_enabled=yes mono_glue=no
+            
           fi
 
       - name: Prepare Artifact (macOS)
