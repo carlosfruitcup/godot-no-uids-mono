@@ -2,22 +2,15 @@
 
 > **This is a custom fork of Godot Engine.**
 >
-> 🛑 **Feature**: This build **disables** the automatic generation of `.uid` files by default.
-> 📦 **Builds**: Check the [Releases Page](../../releases) for pre-compiled binaries of stable versions (Windows, macOS, Linux).
-> 🤖 **Automation**: This fork automatically checks for new Godot stable versions daily, applies [Patch #100973](https://github.com/godotengine/godot/pull/100973), and compiles new binaries.
+> **Feature**: This build **disables** the automatic generation of `.uid` files by default.
+> **Builds**: Check the [Releases Page](../../releases) for pre-compiled binaries of stable versions (Windows, macOS, Linux).
+> **Automation**: This fork automatically checks for new Godot stable versions daily, applies [Patch #100973](https://github.com/godotengine/godot/pull/100973), and compiles new binaries.
+> This "fork" of a fork only does Mono Builds of the Godot Engine as the original fork did not.
 
 ---
 
 ## � Installation
-
-### macOS (Homebrew)
-
-The easiest way to install on macOS is via Homebrew:
-
-```bash
-brew tap rafaismyname/godot-no-uids
-brew install --cask godot-no-uids
-```
+> Note: MacOS Support is currently disabled as I've got no idea how to compile it with Mono
 
 ### Manual Download
 
@@ -29,7 +22,7 @@ Download the release for your platform from the [Releases page](../../releases).
 
 If you have an existing project with UIDs, you can delete them all in one go using our hosted script.
 
-### Mac / Linux
+### Mac / Linux / Windows (MSYS2)
 ```bash
 curl -sL https://raw.githubusercontent.com/rafaismyname/godot-no-uids/master/scripts/clean_uids.sh | bash
 ```
@@ -49,7 +42,7 @@ chmod +x clean_uids.sh
 
 *   **[Godot Engine](https://godotengine.org)**: The amazing engine we all love.
 *   **[Daylily-Zeleen](https://github.com/Daylily-Zeleen)**: For authoring [PR #100973](https://github.com/godotengine/godot/pull/100973) which makes the optional UID system possible.
-
+*	**[Rafael Moterani](https://github.com/rafaismyname)**: For the original fork
 ---
 
 # Godot Engine (Original README)
