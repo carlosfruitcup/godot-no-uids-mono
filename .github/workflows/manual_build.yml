@@ -125,7 +125,7 @@ jobs:
             chmod +x bin/Godot.app/Contents/MacOS/Godot
           else
             scons platform=${{matrix.platform}} d3d12=no tools=yes module_mono_enabled=yes mono_glue=no
-            bin/godot.windows.editor.x86_64.mono.exe --generate-mono-glue module/mono/glue
+            bin/godot.windows.editor.x86_64.mono.exe --headless --generate-mono-glue module/mono/glue
             scons platform=${{matrix.platform}} d3d12=no tools=yes module_mono_enabled=yes mono_glue=yes
             scons platform=${{matrix.platform}} d3d12=no tools=no module_mono_enabled=yes mono_glue=no
             
