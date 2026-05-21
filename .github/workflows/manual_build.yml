@@ -41,12 +41,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - name: Linux
-            os: ubuntu-latest
-            platform: linuxbsd
-            arch: x86_64
-            artifact_name: godot.linuxbsd.editor.x86_64
-            
           - name: Windows
             os: windows-latest
             platform: windows
