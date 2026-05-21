@@ -45,13 +45,12 @@ jobs:
             os: windows-latest
             platform: windows
             arch: x86_64
-            artifact_name: godot.windows.editor.x86_64.exe
-
-          - name: macOS
-            os: macos-latest
-            platform: macos
-            arch: x86_64 # Placeholder for universal logic
-            artifact_name: godot.macos.editor
+            artifact_name: godot.windows.editor.x86_64.mono.exe
+          - name: Linux
+            os: ubuntu-latest
+            platform: linuxbsd
+            arch: x86_64
+            artifact_name: godot.linuxbsd.editor.x86_64.mono
 
     runs-on: ${{ matrix.os }}
     
@@ -119,7 +118,7 @@ jobs:
             chmod +x bin/Godot.app/Contents/MacOS/Godot
           else
             scons platform=${{matrix.platform}} d3d12=no tools=yes module_mono_enabled=yes mono_glue=no
-            bin/godot.windows.editor.x86_64.mono.exe --headless --generate-mono-glue module/mono/glue
+            bin/${{ matrix.artifact_name }} --headless --generate-mono-glue module/mono/glue
             scons platform=${{matrix.platform}} d3d12=no tools=yes module_mono_enabled=yes mono_glue=yes
             scons platform=${{matrix.platform}} d3d12=no tools=no module_mono_enabled=yes mono_glue=no
             
@@ -136,13 +135,13 @@ jobs:
         shell: bash
         run: |
           VERSION="${{ needs.check-release.outputs.version }}"
-          SRC="bin/godot.windows.editor.x86_64.mono.exe"
+          SRC="bin/${{ matrix.artifact_name }}"
           
           if [ "${{ matrix.platform }}" == "windows" ]; then
-            mv "$SRC" "godot-${VERSION}-nouid-${{ matrix.name }}.exe"
+            mv "$SRC" "godot-${VERSION}-mono-nouid-${{ matrix.name }}.exe"
           else
-            mv "$SRC" "godot-${VERSION}-nouid-${{ matrix.name }}"
-            chmod +x "godot-${VERSION}-nouid-${{ matrix.name }}"
+            mv "$SRC" "godot-${VERSION}-mono-nouid-${{ matrix.name }}"
+            chmod +x "godot-${VERSION}-mono-nouid-${{ matrix.name }}"
           fi
 
       - name: Upload Artifact
@@ -170,6 +169,7 @@ jobs:
           name: Godot ${{ needs.check-release.outputs.version }} (No UID)
           body: |
             Manual build of Godot ${{ needs.check-release.outputs.version }} with UID generation disabled by default.
+            You will need to provide your own GodotSharp folder.
             
             Patch applied: https://github.com/godotengine/godot/pull/100973
           files: |
