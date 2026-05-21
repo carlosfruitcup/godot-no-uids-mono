@@ -142,7 +142,7 @@ jobs:
         shell: bash
         run: |
           VERSION="${{ needs.check-release.outputs.version }}"
-          SRC="bin/${{ matrix.artifact_name }}"
+          SRC="bin/godot.windows.editor.x86_64.mono.exe"
           
           if [ "${{ matrix.platform }}" == "windows" ]; then
             mv "$SRC" "godot-${VERSION}-nouid-${{ matrix.name }}.exe"
