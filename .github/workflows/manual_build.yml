@@ -78,6 +78,7 @@ jobs:
       - name: Apply No-UID Patch
         shell: bash
         run: |
+          set +e
           echo "Downloading PR #100973..."
           curl -L https://github.com/godotengine/godot/pull/100973.diff > no_uid.patch
           
@@ -98,6 +99,8 @@ jobs:
              echo "ERROR: Could not find settings line to patch."
              exit 1
           fi
+
+          set -e
 
       - name: Build Godot Editor
         shell: bash
