@@ -83,6 +83,11 @@ jobs:
           
           echo "Applying patch..."
           git apply no_uid.patch
+
+          echo "Downloading PR #107227..."
+          curl -L https://github.com/godotengine/godot/pull/107227.diff > traits.patch
+
+          git apply traits.patch
           
           echo "Forcing default to FALSE..."
           if grep -q "editor/resource/generate_uid_files" editor/register_editor_types.cpp; then
